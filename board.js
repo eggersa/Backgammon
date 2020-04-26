@@ -38,6 +38,70 @@ class Board {
         this._draw();
     }
 
+    /**
+     * In the most commonly used setup, each player begins with fifteen chips, 
+     * two are placed on their 24-point, three on their 8-point,
+     * and five each on their 13-point and their 6-point.
+     */
+    _setup() {
+        var y = 40; // y coordinate of points
+        var x = 40; // x coordinate of current point
+        var width = 50; // width of points
+        var height = 250; // height of points
+        var space = 4; // space between points
+
+        // Helper function to push n stones on the given point.
+        const pushstones = (point, player, n) => {
+            for (; n > 0; n--) {
+                point.stones.push(new Stone(player));
+            }
+        }
+
+        // top row
+        var pos = 13;
+        for (var i = 0; i < 12; i++) {
+            var point = new Point(x, y, width, height, true, pos);
+            this._points.unshift(point);
+            x += (width + space);
+            if (i == 5) {
+                x += 25;
+            }
+            pos++;
+        }
+
+        // bottom row
+        pos = 12;
+        x = 40;
+        y = y + height + 40;
+        for (var i = 0; i < 12; i++) {
+            var point = new Point(x, y, width, height, false, pos);
+            this._points.push(point);
+            x += (width + space);
+            if (i == 5) {
+                x += 25;
+            }
+            pos--;
+        }
+
+        // set stones
+        for(const point of this._points){
+            var p = point.position;
+            if (25 - p == 6 || 25 - p == 13) {
+                pushstones(point, true, 5); // white
+            } else if (p == 6 || p == 13) {
+                pushstones(point, false, 5); // black
+            } else if (25 - p == 24) {
+                pushstones(point, true, 2); // white
+            } else if (p == 24) {
+                pushstones(point, false, 2); // black
+            } else if (25 - p == 8) {
+                pushstones(point, true, 3); // white
+            } else if (p == 8) {
+                pushstones(point, false, 3); // black
+            }
+        }
+    }
+
     _mousedown(pos) {
         // Reset stone being dragged.
         this._stoneDrag = null;
@@ -102,21 +166,6 @@ class Board {
     }
 
     /**
-     * In the most commonly used setup, each player begins with fifteen chips, 
-     * two are placed on their 24-point, three on their 8-point,
-     * and five each on their 13-point and their 6-point.
-     */
-    _setup() {
-        var p1 = new Point(40, 40, 90, 360);
-        p1.stones.push(new Stone(true));
-        p1.stones.push(new Stone(true));
-        this._points.push(p1);
-
-        var p2 = new Point(170, 40, 90, 360);
-        this._points.push(p2);
-    }
-
-    /**
      * Updates the boards visual state.
      */
     _update() {
@@ -131,6 +180,7 @@ class Board {
     _draw() {
         const context2d = this._canvas.getContext("2d");
         context2d.clearRect(0, 0, canvas.width, canvas.height);
+
         for (var i = 0; i < this._points.length; i++) {
             this._points[i].draw(context2d)
         }
