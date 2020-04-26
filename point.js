@@ -35,10 +35,10 @@ class Point {
 
         if (this._orientation) {
             y = this._y + 3 + radius;
-            yIncrement = 2 * radius;
+            yIncrement = 2 * radius + 4;
         } else {
             y = this._y + this._height - 3 - radius;
-            yIncrement = -2 * radius;
+            yIncrement = -2 * radius - 4;
         }
 
         for (var i = 0; i < this._stones.length; i++) {
