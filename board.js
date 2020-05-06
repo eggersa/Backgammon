@@ -153,8 +153,8 @@ class Board {
                 point.update();
             } else { // If point is being dropped outside a point.
                 this._dragSource.stones.push(this._stoneDrag);
-                this._dragSource.update();
             }
+            this._dragSource.update();
 
             // For simplicity, just redraw the entire board.
             this._draw();

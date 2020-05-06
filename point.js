@@ -1,4 +1,8 @@
 class Point {
+    static EVEN_COLOR = "#A93226";
+    static UNEVEN_COLOR = "#F5CBA7";
+
+
     /**
      * @param {*} x - The absoulte x-coordinate of the point.
      * @param {*} y - The absoulte y-coordinate of the point.
@@ -59,8 +63,31 @@ class Point {
             textY = this._orientation ? (this._y - 14) : (this._y + this._height + 17);
         canvasUtils.text(context2d, this._pos, textX, textY, font);
 
+        // determine alternating color
+        var color = this._pos % 2 == 0 ? Point.EVEN_COLOR : Point.UNEVEN_COLOR;
+
         // draw point
-        canvasUtils.rect(context2d, this._x, this._y, this._width, this._height);
+        // canvasUtils.rect(context2d, this._x, this._y, this._width, this._height, color);
+
+        context2d.fillStyle = color;
+        context2d.strokeStyle = "black";
+        context2d.lineWidth = 2;
+        context2d.beginPath();
+
+        let center = this._x + this._width / 2;
+        let y1 = this._y;
+        let y2 = this._y + this._height;
+        if(this._orientation){
+            [y1, y2] = [y2, y1]; // swap
+        }
+
+        context2d.moveTo(center, y1);
+        context2d.lineTo(this._x + this._width, y2);
+        context2d.lineTo(this._x, y2);
+        context2d.lineTo(center, y1);
+        context2d.fill();
+        context2d.stroke();
+
 
         // draw each stone
         for (var i = 0; i < this._stones.length; i++) {
