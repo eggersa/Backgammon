@@ -5,10 +5,10 @@ class Board {
         // Each side of the board has a track of 12 long triangles, called points.
         this._points = [];
 
-        // Holds the stone that is being dragged.
-        this._stoneDrag = null;
+        // Holds the checker that is being dragged.
+        this._checkerDrag = null;
 
-        // Holds the point that the stone is being dragged away from.
+        // Holds the point from which the checker is being dragged away.
         this._dragSource = null;
 
         // Reference instance inside event handlers.
@@ -50,10 +50,10 @@ class Board {
         var height = 250; // height of points
         var space = 4; // space between points
 
-        // Helper function to push n stones on the given point.
-        const pushstones = (point, player, n) => {
+        // Helper function to push n checkers on the given point.
+        const pushscheckers = (point, player, n) => {
             for (; n > 0; n--) {
-                point.stones.push(new Stone(player));
+                point.checkers.push(new Checker(player));
             }
         }
 
@@ -83,28 +83,28 @@ class Board {
             pos--;
         }
 
-        // set stones
+        // set checkers
         for(const point of this._points){
             var p = point.position;
             if (25 - p == 6 || 25 - p == 13) {
-                pushstones(point, true, 5); // white
+                pushscheckers(point, false, 5); // white
             } else if (p == 6 || p == 13) {
-                pushstones(point, false, 5); // black
+                pushscheckers(point, true, 5); // black
             } else if (25 - p == 24) {
-                pushstones(point, true, 2); // white
+                pushscheckers(point, false, 2); // white
             } else if (p == 24) {
-                pushstones(point, false, 2); // black
+                pushscheckers(point, true, 2); // black
             } else if (25 - p == 8) {
-                pushstones(point, true, 3); // white
+                pushscheckers(point, false, 3); // white
             } else if (p == 8) {
-                pushstones(point, false, 3); // black
+                pushscheckers(point, true, 3); // black
             }
         }
     }
 
     _mousedown(pos) {
-        // Reset stone being dragged.
-        this._stoneDrag = null;
+        // Reset checker being dragged.
+        this._checkerDrag = null;
         this._dragSource = null;
 
         // Find point at the cursors position.
@@ -115,14 +115,14 @@ class Board {
             }
         }
 
-        // Find stone at the cursors position.
+        // Find checker at the cursors position.
         if (this._dragSource !== null) {
-            for (var i = 0; i < this._dragSource._stones.length; i++) {
-                if (this._dragSource.stones[i].hittest(pos.x, pos.y)) {
-                    // Reference the stone to be dragged.
-                    this._stoneDrag = this._dragSource.stones[i];
-                    // Remove stone from drag source.
-                    this._dragSource.stones.splice(i, 1);
+            for (var i = 0; i < this._dragSource._checkers.length; i++) {
+                if (this._dragSource.checkers[i].hittest(pos.x, pos.y)) {
+                    // Reference the checker to be dragged.
+                    this._checkerDrag = this._dragSource.checkers[i];
+                    // Remove checker from drag source.
+                    this._dragSource.checkers.splice(i, 1);
                     break;
                 }
             }
@@ -130,15 +130,15 @@ class Board {
     }
 
     _mousemove(pos) {
-        if (this._stoneDrag !== null) {
-            this._stoneDrag._x = pos.x;
-            this._stoneDrag._y = pos.y;
+        if (this._checkerDrag !== null) {
+            this._checkerDrag._x = pos.x;
+            this._checkerDrag._y = pos.y;
             this._draw();
         }
     }
 
     _mouseup(pos) {
-        if (this._stoneDrag !== null) {
+        if (this._checkerDrag !== null) {
             // Find point at the cursors position.
             var point = null;
             for (var i = 0; i < this._points.length; i++) {
@@ -149,10 +149,10 @@ class Board {
             }
 
             if (point !== null) {
-                point.stones.push(this._stoneDrag);
+                point.checkers.push(this._checkerDrag);
                 point.update();
             } else { // If point is being dropped outside a point.
-                this._dragSource.stones.push(this._stoneDrag);
+                this._dragSource.checkers.push(this._checkerDrag);
             }
             this._dragSource.update();
 
@@ -160,7 +160,7 @@ class Board {
             this._draw();
 
             // Reset drag operation.
-            this._stoneDrag = null;
+            this._checkerDrag = null;
             this._dragSource = null;
         }
     }
@@ -185,8 +185,8 @@ class Board {
             this._points[i].draw(context2d)
         }
 
-        if (this._stoneDrag !== null) {
-            this._stoneDrag.draw(context2d);
+        if (this._checkerDrag !== null) {
+            this._checkerDrag.draw(context2d);
         }
     }
 

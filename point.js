@@ -15,13 +15,13 @@ class Point {
         this._y = y;
         this._width = width;
         this._height = height;
-        this._stones = [];
+        this._checkers = [];
         this._orientation = orientation;
         this._pos = pos;
     }
 
-    get stones() {
-        return this._stones;
+    get checkers() {
+        return this._checkers;
     }
 
     get position() {
@@ -29,11 +29,11 @@ class Point {
     }
 
     /**
-     * Updates the absolute position of each stone.
+     * Updates the absolute position of each checker.
      */
     update() {
-        var radius = (this._width - 6) / 2, // radius of stone
-            x = this._x + radius + 3, // x is the same for all stones within a point
+        var radius = (this._width - 6) / 2, // radius of checker
+            x = this._x + radius + 3, // x is the same for all checkers within a point
             y = 0,
             yIncrement = 0;
 
@@ -45,15 +45,15 @@ class Point {
             yIncrement = -2 * radius - 4;
         }
 
-        for (var i = 0; i < this._stones.length; i++) {
-            this._stones[i]._x = x;
-            this._stones[i]._y = y + (i * yIncrement);
-            this._stones[i]._radius = radius;
+        for (var i = 0; i < this._checkers.length; i++) {
+            this._checkers[i]._x = x;
+            this._checkers[i]._y = y + (i * yIncrement);
+            this._checkers[i]._radius = radius;
         }
     }
 
     /**
-     * Draws the point and its stones.
+     * Draws the point and its checkers.
      * @param {*} context2d - A 2d context from a canvas.
      */
     draw(context2d) {
@@ -89,9 +89,9 @@ class Point {
         context2d.stroke();
 
 
-        // draw each stone
-        for (var i = 0; i < this._stones.length; i++) {
-            this._stones[i].draw(context2d);
+        // draw each checker
+        for (var i = 0; i < this._checkers.length; i++) {
+            this._checkers[i].draw(context2d);
         }
     }
 

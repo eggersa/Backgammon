@@ -1,4 +1,4 @@
-class Stone {
+class Checker {
     constructor(player) {
         this._x = 0;
         this._y = 0;
