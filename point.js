@@ -2,13 +2,12 @@ class Point {
     static EVEN_COLOR = "#A93226";
     static UNEVEN_COLOR = "#F5CBA7";
 
-
     /**
      * @param {*} x - The absoulte x-coordinate of the point.
      * @param {*} y - The absoulte y-coordinate of the point.
      * @param {*} width - The width of the point.
      * @param {*} height - The height of the point.
-     * @param {*} orientation - true = top, false = bottom 
+     * @param {*} orientation - true = flat-top, false = flat-bottom 
      */
     constructor(x, y, width, height, orientation, pos) {
         this._x = x;
@@ -57,12 +56,6 @@ class Point {
      * @param {*} context2d - A 2d context from a canvas.
      */
     draw(context2d) {
-        // draw position number
-        var font = context2d.font = "13px Arial",
-            textX = this._x + ((this._width) / 2),
-            textY = this._orientation ? (this._y - 14) : (this._y + this._height + 17);
-        canvasUtils.text(context2d, this._pos, textX, textY, font);
-
         // determine alternating color
         var color = this._pos % 2 == 0 ? Point.EVEN_COLOR : Point.UNEVEN_COLOR;
 
@@ -77,7 +70,7 @@ class Point {
         let center = this._x + this._width / 2;
         let y1 = this._y;
         let y2 = this._y + this._height;
-        if(this._orientation){
+        if (this._orientation) {
             [y1, y2] = [y2, y1]; // swap
         }
 

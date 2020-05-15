@@ -1,6 +1,13 @@
 class Board {
+    static MIN_HEIGHT = 620;
+    static MIN_WIDTH = 800;
+
     constructor(canvas) {
         this._canvas = canvas;
+
+        // Absolute height of the board.
+        this._height = Math.max(Board.MIN_HEIGHT, this._canvas.height);
+        this._width = Math.max(Board.MIN_WIDTH, this._canvas.width);
 
         // Each side of the board has a track of 12 long triangles, called points.
         this._points = [];
@@ -10,6 +17,9 @@ class Board {
 
         // Holds the point from which the checker is being dragged away.
         this._dragSource = null;
+
+        // Holds the dice pair.
+        this._dicePair = new DicePair(this._width - 100, (this._height - 120) / 2, 50, 120);
 
         // Reference instance inside event handlers.
         var instance = this;
@@ -44,11 +54,12 @@ class Board {
      * and five each on their 13-point and their 6-point.
      */
     _setup() {
-        var y = 40; // y coordinate of points
-        var x = 40; // x coordinate of current point
-        var width = 50; // width of points
-        var height = 250; // height of points
-        var space = 4; // space between points
+        var y = 0; // y coordinate of points
+        var x = 0; // x coordinate of current point
+        var pointWidth = 50; // width of points
+        var pointHeight = 250; // height of points
+        var pointSpace = 4; // space between points
+        var barWidth = 25; // width of bar
 
         // Helper function to push n checkers on the given point.
         const pushscheckers = (point, player, n) => {
@@ -60,25 +71,25 @@ class Board {
         // top row
         var pos = 13;
         for (var i = 0; i < 12; i++) {
-            var point = new Point(x, y, width, height, true, pos);
+            var point = new Point(x, y, pointWidth, pointHeight, true, pos);
             this._points.unshift(point);
-            x += (width + space);
+            x += (pointWidth + pointSpace);
             if (i == 5) {
-                x += 25;
+                x += barWidth;
             }
             pos++;
         }
 
         // bottom row
         pos = 12;
-        x = 40;
-        y = y + height + 40;
+        x = 0;
+        y = this._height - pointHeight;
         for (var i = 0; i < 12; i++) {
-            var point = new Point(x, y, width, height, false, pos);
+            var point = new Point(x, y, pointWidth, pointHeight, false, pos);
             this._points.push(point);
-            x += (width + space);
+            x += (pointWidth + pointSpace);
             if (i == 5) {
-                x += 25;
+                x += barWidth;
             }
             pos--;
         }
@@ -100,6 +111,8 @@ class Board {
                 pushscheckers(point, true, 3); // black
             }
         }
+
+        this._dicePair.roll();
     }
 
     _mousedown(pos) {
@@ -188,6 +201,8 @@ class Board {
         if (this._checkerDrag !== null) {
             this._checkerDrag.draw(context2d);
         }
+
+        this._dicePair.draw(context2d);
     }
 
     /**

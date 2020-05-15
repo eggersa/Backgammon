@@ -37,7 +37,6 @@ class canvasUtils {
         
         context2d.font = font;
         context2d.textAlign = "center";
-        context2d.textBaseline = "middle";
         context2d.fillStyle = strokeStyle;
         context2d.fillText(text, x, y);
 
