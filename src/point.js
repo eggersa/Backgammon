@@ -1,4 +1,4 @@
-class Point {
+export default class Point {
     static EVEN_COLOR = "#A93226";
     static UNEVEN_COLOR = "#F5CBA7";
 

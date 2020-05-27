@@ -1,0 +1,22 @@
+{
+  "name": "backgammon",
+  "version": "1.0.0",
+  "description": "",
+  "main": "backgammon.js",
+  "scripts": {
+    "start": "http-server -c-1 -p 8081"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eggersa/Backgammon.git"
+  },
+  "author": "Samuel Egger",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eggersa/Backgammon/issues"
+  },
+  "homepage": "https://github.com/eggersa/Backgammon#readme",
+  "dependencies": {
+    "http-server": "^0.12.3"
+  }
+}

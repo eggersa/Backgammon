@@ -1,4 +1,8 @@
-class Board {
+import DicePair from './dicePair.js';
+import Checker from './checker.js';
+import Point from './point.js';
+
+export default class Board {
     static MIN_HEIGHT = 620;
     static MIN_WIDTH = 800;
 

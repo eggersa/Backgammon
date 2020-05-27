@@ -1,3 +1,5 @@
+import Board from './board.js';
+
 window.onload = function () {
     var canvas = document.getElementById("canvas");
 

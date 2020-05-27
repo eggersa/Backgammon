@@ -1,4 +1,4 @@
-class DicePair {
+export default class DicePair {
     static DICE_COLOR = "#D77";
     static DOT_COLOR = "#000";
 
