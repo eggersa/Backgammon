@@ -1,5 +1,5 @@
 # Backgammon
-![](https://raw.githubusercontent.com/eggersa/Backgammon/master/docs/Screenshot.png | width=480)
+![](https://raw.githubusercontent.com/eggersa/Backgammon/master/docs/Screenshot.png)
 
 # References
 
