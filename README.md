@@ -8,3 +8,4 @@
 - https://www.bkgm.com/rules.html
 - https://en.wikipedia.org/wiki/Negamax
 - https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning
+- http://usbgf.org/learn-backgammon/backgammon-rules-and-terms/rules-of-backgammon/
