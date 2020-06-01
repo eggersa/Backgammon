@@ -23,6 +23,9 @@ A player must always use the rolled numbers if possible. If only one move can be
 
 In this simplified version of the game, we do not account for doubles e.g. both dice have the same value.
 
+### Hitting enemy checkers
+A point that is occupied by one checker is called a **blot**. If a checker from the opposing player lands on a blot, the own checker must be removed and put on the bar. Checkers on the bar must be played first. A checker from a bar can enter a rolled point if the point is open. If a checker from the bar can not enter a point, the player loses his turn.
+
 ## References
 
 - Material from Lectures
