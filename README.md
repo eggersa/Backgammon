@@ -35,3 +35,6 @@ A point that is occupied by one checker is called a **blot**. If a checker from 
 - https://en.wikipedia.org/wiki/Negamax
 - https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning
 - http://usbgf.org/learn-backgammon/backgammon-rules-and-terms/rules-of-backgammon/
+- https://en.wikipedia.org/wiki/Expectiminimax
+- https://www.youtube.com/watch?v=r-RxPnnp__o
+- https://www.geeksforgeeks.org/expectimax-algorithm-in-game-theory/
