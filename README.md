@@ -38,3 +38,4 @@ A point that is occupied by one checker is called a **blot**. If a checker from 
 - https://en.wikipedia.org/wiki/Expectiminimax
 - https://www.youtube.com/watch?v=r-RxPnnp__o
 - https://www.geeksforgeeks.org/expectimax-algorithm-in-game-theory/
+- Miscellaneous sources related to JavaScript specifics like the HTML5 canvas API.
